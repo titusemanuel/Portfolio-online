@@ -3,69 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slideshow Simplu Comentat</title>
-    
-    <!-- Stilizare simplă pentru slideshow -->
+    <title>Portfolio-online</title>
     <style>
         body {
-            display: flex; /* Centrează div-ul pe verticală și orizontală */
+            display: flex; /* Centrează conținutul pe verticală și orizontală */
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Înălțimea paginii = 100% din ecran */
+            height: 100vh; /* Ocupă toată înălțimea vizibilă a paginii */
             margin: 0;
             background-color: #f0f0f0;
+            font-family: sans-serif;
         }
 
-        #slideshow {
-            width: 600px;  /* Lățimea containerului */
-            height: 400px; /* Înălțimea containerului */
-            overflow: hidden; /* Ascunde orice parte din imagine care depășește containerul */
-            border: 2px solid #ccc; /* Chenar gri */
-            border-radius: 10px; /* Colțuri rotunjite */
+        #slideshow-container {
+            position: relative; /* Containerul este baza pentru poziționarea săgeților */
+            width: 80%; /* Lățimea containerului, se poate ajusta */
+            max-width: 800px;
+            border: 2px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden; /* Ascunde imaginile care depășesc containerul */
         }
 
-        #slideshow img {
-            width: 100%;   /* Imaginea ocupă toată lățimea containerului */
-            height: 100%;  /* Imaginea ocupă toată înălțimea containerului */
-            object-fit: cover; /* Imaginea se scalează fără a se deforma */
+        .slide {
+            display: none; /* Ascunde toate imaginile inițial */
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 0 3px 3px 0;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .dot-container {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: #717171;
         }
     </style>
 </head>
 <body>
 
-    <!-- Container pentru slideshow -->
-    <div id="slideshow">
-        <!-- Imaginea curentă va fi afișată aici -->
-        <img src="poza1.jpg" alt="Poza 1" id="slide">
+<div id="slideshow-container">
+
+    <div class="slide fade">
+        <img src="poza1.jpg" alt="Descrierea Pozei 1">
+        <div class="text">Text pentru Poza 1</div>
     </div>
 
-    <script>
-        // Lista cu fotografii pe care le vrei în slideshow
-        const imagini = [
-            "poza1.jpg", // Poza 1
-            "poza2.jpg", // Poza 2
-            "poza3.jpg", // Poza 3
-            "poza4.jpg"  // Poza 4
-        ];
+    <div class="slide fade">
+        <img src="poza2.jpg" alt="Descrierea Pozei 2">
+        <div class="text">Text pentru Poza 2</div>
+    </div>
 
-        // Variabila index pentru a ști ce poză este afișată în prezent
-        let index = 0;
+    <div class="slide fade">
+        <img src="poza3.jpg" alt="Descrierea Pozei 3">
+        <div class="text">Text pentru Poza 3</div>
+    </div>
 
-        // Obține elementul <img> din HTML unde se vor afișa pozele
-        const slide = document.getElementById("slide");
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
 
-        // Funcție care schimbă poza curentă
-        function schimbaPoza() {
-            index++; // Treci la următoarea poză
-            if (index >= imagini.length) {
-                index = 0; // Dacă ajungi la ultima, revii la prima poză
-            }
-            slide.src = imagini[index]; // Actualizează sursa imaginii
-        }
+<div class="dot-container">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+</div>
 
-        // Setează schimbarea automată a pozelor la fiecare 3 secunde (3000 ms)
-        setInterval(schimbaPoza, 3000);
-    </script>
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("slide");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+}
+</script>
 
 </body>
 </html>
