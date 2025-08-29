@@ -1,92 +1,181 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofoliu Foto - Numele Tău</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio online</title>
+  <style>
+    body { margin:0; font-family:system-ui, Arial, sans-serif; background:#111; color:#fff; }
+    .wrap { max-width: 900px; margin: 40px auto; padding: 0 16px; }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;         /* înălțime automată, păstrează raportul */
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.5);
+      background: #000;
+    }
+
+    .slides {
+      display: flex;
+      height: 100%;
+      transition: transform .6s ease;
+    }
+
+    .slides img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex: 0 0 100%;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none; /* ca să nu “agațe” swipe-ul */
+    }
+
+    /* Butoane */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px; height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(0,0,0,.5);
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      display: grid; place-items: center;
+      transition: background .2s;
+    }
+    .arrow:hover { background: rgba(0,0,0,.8); }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+
+    /* Buline */
+    .dots {
+      position: absolute;
+      left: 50%; bottom: 12px;
+      transform: translateX(-50%);
+      display: flex; gap: 8px;
+      background: rgba(0,0,0,.35);
+      padding: 6px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(2px);
+    }
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #bbb;
+      opacity: .6;
+      border: 0;
+      cursor: pointer;
+    }
+    .dot.active { background: #fff; opacity: 1; }
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <h1 style="margin:0 0 14px">Portfolio online</h1>
 
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="#home">Numele Tău Fotografie</a>
-            </div>
-            <ul>
-                <li><a href="#home">Acasă</a></li>
-                <li><a href="#about">Despre Mine</a></li>
-                <li><a href="#portfolio">Portofoliu</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="carousel" id="carousel">
+      <div class="slides">
+        <img src="poza1.jpg" alt="Foto 1">
+        <img src="poza2.jpg" alt="Foto 2">
+        <img src="poza3.jpg" alt="Foto 3">
+        <img src="poza4.jpg" alt="Foto 4">
+      </div>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Capturând Momente, Spunând Povești</h1>
-                <p>Fotograf pasionat de peisaje, portrete și evenimente.</p>
-                <a href="#portfolio" class="button">Vezi Portofoliul</a>
-            </div>
-        </section>
+      <button class="arrow prev" aria-label="Înainte">&#10094;</button>
+      <button class="arrow next" aria-label="Următor">&#10095;</button>
 
-        <section id="about" class="container">
-            <h2>Despre Mine</h2>
-            <div class="about-content">
-                <img src="images/profile.jpg" alt="Poza de profil Numele Tău" class="profile-pic">
-                <p>Salut! Sunt [Numele Tău], un fotograf din [Orașul Tău, ex: Timișoara] cu o pasiune profundă pentru arta vizuală. De la vârsta de [X] ani, am descoperit magia de a îngheța timpul într-o imagine. Fie că este vorba de frumusețea brută a naturii, emoția sinceră a unui eveniment sau expresivitatea unui portret, îmi propun să creez imagini care rezonează și povestesc. Cred că fiecare imagine are o poveste de spus și sunt aici să te ajut să o spui pe a ta.</p>
-                <p>Mă specializez în [ex: fotografia de peisaj, fotografia de nuntă, fotografia de produs] și sunt mereu în căutare de noi provocări creative. Aștept cu drag să colaborăm!</p>
-            </div>
-        </section>
+      <div class="dots" aria-label="Indicatori">
+        <!-- se populează din JS -->
+      </div>
+    </div>
+  </div>
 
-        <section id="portfolio" class="container">
-            <h2>Portofoliu</h2>
-            <div class="carousel-container">
-                <div class="carousel-slide">
-                    <img src="images/photo1.jpg" alt="Peisaj Montan">
-                    <img src="images/photo2.jpg" alt="Portret Studio">
-                    <img src="images/photo3.jpg" alt="Eveniment Nuntă">
-                    <img src="images/photo4.jpg" alt="Fotografie Urbană">
-                    <img src="images/photo5.jpg" alt="Natură Statică">
-                </div>
-                <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
-                <button class="next" onclick="plusSlides(1)">&#10095;</button>
-            </div>
-            <p class="carousel-caption">Glisează pentru a vedea mai multe lucrări.</p>
-        </section>
+  <script>
+    // === Setup ===
+    const root = document.getElementById('carousel');
+    const track = root.querySelector('.slides');
+    const slides = [...track.children];
+    const prev = root.querySelector('.prev');
+    const next = root.querySelector('.next');
+    const dotsWrap = root.querySelector('.dots');
 
-        <section id="contact" class="container">
-            <h2>Contact</h2>
-            <p>Ești interesat de o colaborare sau ai o întrebare? Nu ezita să mă contactezi!</p>
-            <form action="#" method="POST"> <div class="form-group">
-                    <label for="name">Nume:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Mesaj:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="button">Trimite Mesajul</button>
-            </form>
-            <div class="social-links">
-                <p>Mă găsești și pe:</p>
-                <a href="https://www.instagram.com/contultau" target="_blank">Instagram</a>
-                <a href="https://www.facebook.com/contultau" target="_blank">Facebook</a>
-                <a href="https://www.linkedin.com/in/contultau" target="_blank">LinkedIn</a>
-            </div>
-        </section>
-    </main>
+    let index = 0;
+    let autoTimer = null;
+    const INTERVAL = 3500;
 
-    <footer>
-        <p id="copyright-text"></p>
-    </footer>
+    // Creează buline
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.className = 'dot' + (i === 0 ? ' active' : '');
+      b.setAttribute('aria-label', 'Slide ' + (i+1));
+      b.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(b);
+    });
+    const dots = [...dotsWrap.children];
 
-    <script src="script.js"></script>
+    // === Funcții ===
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, di) => d.classList.toggle('active', di === index));
+    }
+
+    function nextSlide() { goTo(index + 1); }
+    function prevSlide() { goTo(index - 1); }
+
+    function startAuto() { stopAuto(); autoTimer = setInterval(nextSlide, INTERVAL); }
+    function stopAuto() { if (autoTimer) clearInterval(autoTimer); }
+
+    // === Evenimente ===
+    next.addEventListener('click', () => { nextSlide(); startAuto(); });
+    prev.addEventListener('click', () => { prevSlide(); startAuto(); });
+
+    // Autoplay + pauză la hover
+    root.addEventListener('mouseenter', stopAuto);
+    root.addEventListener('mouseleave', startAuto);
+
+    // Swipe (touch)
+    let startX = 0, dx = 0, touching = false;
+
+    root.addEventListener('touchstart', (e) => {
+      touching = true;
+      startX = e.touches[0].clientX;
+      stopAuto();
+    }, {passive:true});
+
+    root.addEventListener('touchmove', (e) => {
+      if (!touching) return;
+      dx = e.touches[0].clientX - startX;
+    }, {passive:true});
+
+    root.addEventListener('touchend', () => {
+      if (!touching) return;
+      if (dx > 50) prevSlide();
+      else if (dx < -50) nextSlide();
+      touching = false; dx = 0;
+      startAuto();
+    });
+
+    // Navigare din tastatură
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    // Pornește
+    goTo(0);
+    startAuto();
+  </script>
+<footer class="site-footer">
+  © <span id="year"></span> Iliesi Titus Emanuel. Toate drepturile rezervate.
+  <small>Proprietate intelectuală — folosire și distribuire permisă doar cu acordul autorului.</small>
+</footer>
+
 </body>
 </html>
