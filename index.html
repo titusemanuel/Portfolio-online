@@ -3,14 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio-online</title>
+    <title>Portofoliu Foto - Numele Tău</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#home">Numele Tău Fotografie</a>
+            </div>
+            <ul>
+                <li><a href="#home">Acasă</a></li>
+                <li><a href="#about">Despre Mine</a></li>
+                <li><a href="#portfolio">Portofoliu</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-        <h1>Bine ați venit!</h1>
-        <p>Acest este conținutul principal al paginii.</p>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Capturând Momente, Spunând Povești</h1>
+                <p>Fotograf pasionat de peisaje, portrete și evenimente.</p>
+                <a href="#portfolio" class="button">Vezi Portofoliul</a>
+            </div>
+        </section>
+
+        <section id="about" class="container">
+            <h2>Despre Mine</h2>
+            <div class="about-content">
+                <img src="images/profile.jpg" alt="Poza de profil Numele Tău" class="profile-pic">
+                <p>Salut! Sunt [Numele Tău], un fotograf din [Orașul Tău, ex: Timișoara] cu o pasiune profundă pentru arta vizuală. De la vârsta de [X] ani, am descoperit magia de a îngheța timpul într-o imagine. Fie că este vorba de frumusețea brută a naturii, emoția sinceră a unui eveniment sau expresivitatea unui portret, îmi propun să creez imagini care rezonează și povestesc. Cred că fiecare imagine are o poveste de spus și sunt aici să te ajut să o spui pe a ta.</p>
+                <p>Mă specializez în [ex: fotografia de peisaj, fotografia de nuntă, fotografia de produs] și sunt mereu în căutare de noi provocări creative. Aștept cu drag să colaborăm!</p>
+            </div>
+        </section>
+
+        <section id="portfolio" class="container">
+            <h2>Portofoliu</h2>
+            <div class="carousel-container">
+                <div class="carousel-slide">
+                    <img src="images/photo1.jpg" alt="Peisaj Montan">
+                    <img src="images/photo2.jpg" alt="Portret Studio">
+                    <img src="images/photo3.jpg" alt="Eveniment Nuntă">
+                    <img src="images/photo4.jpg" alt="Fotografie Urbană">
+                    <img src="images/photo5.jpg" alt="Natură Statică">
+                </div>
+                <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+                <button class="next" onclick="plusSlides(1)">&#10095;</button>
+            </div>
+            <p class="carousel-caption">Glisează pentru a vedea mai multe lucrări.</p>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>Contact</h2>
+            <p>Ești interesat de o colaborare sau ai o întrebare? Nu ezita să mă contactezi!</p>
+            <form action="#" method="POST"> <div class="form-group">
+                    <label for="name">Nume:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mesaj:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="button">Trimite Mesajul</button>
+            </form>
+            <div class="social-links">
+                <p>Mă găsești și pe:</p>
+                <a href="https://www.instagram.com/contultau" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/contultau" target="_blank">Facebook</a>
+                <a href="https://www.linkedin.com/in/contultau" target="_blank">LinkedIn</a>
+            </div>
+        </section>
     </main>
 
     <footer>
