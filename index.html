@@ -78,22 +78,13 @@
 <body>
   <div class="wrap">
     <h1 style="margin:0 0 14px">Portfolio online</h1>
-<style>
-  /* Poți să adaugi și o suprapunere semi-transparentă pentru protecție suplimentară */
-  img {
-    pointer-events: auto; /* permite JavaScript-ului să prindă click-ul */
-  }
-</style>
-</head>
-<body>
+
     <div class="carousel" id="carousel">
       <div class="slides">
-       <img src="poza1.JPG" alt="Foto 1" oncontextmenu="return false;">
-       <img src="poza2.JPG" alt="Foto 2" oncontextmenu="return false;">
-       <img src="poza3.JPG" alt="Foto 3" oncontextmenu="return false;">
-       <img src="poza4.JPG" alt="Foto 4" oncontextmenu="return false;">
-
-
+        <img src="poza1.jpg" alt="Foto 1">
+        <img src="poza2.jpg" alt="Foto 2">
+        <img src="poza3.jpg" alt="Foto 3">
+        <img src="poza4.jpg" alt="Foto 4">
       </div>
 
       <button class="arrow prev" aria-label="Înainte">&#10094;</button>
@@ -104,15 +95,6 @@
       </div>
     </div>
   </div>
-<script>
-  // Dezactivează click dreapta pe toate imaginile
-  document.addEventListener('contextmenu', function(e) {
-    if(e.target.tagName === 'IMG') {
-      e.preventDefault(); // blochează meniul click dreapta
-      alert('Salvarea imaginii nu este permisă!');
-    }
-  });
-</script>
 
   <script>
     // === Setup ===
@@ -189,15 +171,6 @@
     // Pornește
     goTo(0);
     startAuto();
-    <script>
-  document.addEventListener('contextmenu', function(e) {
-    if(e.target.tagName === 'IMG') {
-      e.preventDefault();
-      alert('Salvarea imaginii nu este permisă.');
-    }
-  });
-</script>
-
   </script>
 <footer class="site-footer">
   © <span id="year"></span> Iliesi Titus Emanuel. Toate drepturile rezervate.
@@ -206,7 +179,3 @@
 
 </body>
 </html>
-
-
-
-
