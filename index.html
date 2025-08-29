@@ -172,6 +172,15 @@
     // Pornește
     goTo(0);
     startAuto();
+    <script>
+  document.addEventListener('contextmenu', function(e) {
+    if(e.target.tagName === 'IMG') {
+      e.preventDefault();
+      alert('Salvarea imaginii nu este permisă.');
+    }
+  });
+</script>
+
   </script>
 <footer class="site-footer">
   © <span id="year"></span> Iliesi Titus Emanuel. Toate drepturile rezervate.
@@ -180,4 +189,5 @@
 
 </body>
 </html>
+
 
