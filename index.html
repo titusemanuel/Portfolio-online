@@ -78,7 +78,14 @@
 <body>
   <div class="wrap">
     <h1 style="margin:0 0 14px">Portfolio online</h1>
-
+<style>
+  /* Poți să adaugi și o suprapunere semi-transparentă pentru protecție suplimentară */
+  img {
+    pointer-events: auto; /* permite JavaScript-ului să prindă click-ul */
+  }
+</style>
+</head>
+<body>
     <div class="carousel" id="carousel">
       <div class="slides">
        <img src="poza1.JPG" alt="Foto 1" oncontextmenu="return false;">
@@ -97,6 +104,15 @@
       </div>
     </div>
   </div>
+<script>
+  // Dezactivează click dreapta pe toate imaginile
+  document.addEventListener('contextmenu', function(e) {
+    if(e.target.tagName === 'IMG') {
+      e.preventDefault(); // blochează meniul click dreapta
+      alert('Salvarea imaginii nu este permisă!');
+    }
+  });
+</script>
 
   <script>
     // === Setup ===
@@ -190,6 +206,7 @@
 
 </body>
 </html>
+
 
 
 
