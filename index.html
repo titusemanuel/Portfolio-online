@@ -1,181 +1,131 @@
 <!doctype html>
 <html lang="ro">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio online</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfolio fotografii — Slideshow</title>
   <style>
-    body { margin:0; font-family:system-ui, Arial, sans-serif; background:#111; color:#fff; }
-    .wrap { max-width: 900px; margin: 40px auto; padding: 0 16px; }
+    /* ===== Stil simplu, responsive ===== */
+    :root{ --bg:#111; --accent:#fff; --controls-bg:rgba(0,0,0,0.35); }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:var(--accent); display:flex; align-items:center; justify-content:center; min-height:100vh}
 
-    .carousel {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;         /* înălțime automată, păstrează raportul */
-      overflow: hidden;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.5);
-      background: #000;
-    }
+    .carousel{ width:100%; max-width:1200px; aspect-ratio:16/9; position:relative; overflow:hidden; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.6); background:#000}
 
-    .slides {
-      display: flex;
-      height: 100%;
-      transition: transform .6s ease;
-    }
+    .slides img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s ease; }
+    .slides img.active{ opacity:1; position:relative }
 
-    .slides img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      flex: 0 0 100%;
-      user-select: none;
-      -webkit-user-drag: none;
-      pointer-events: none; /* ca să nu “agațe” swipe-ul */
-    }
+    /* controls */
+    .control{ position:absolute; top:50%; transform:translateY(-50%); background:var(--controls-bg); border:0; color:var(--accent); padding:8px 12px; cursor:pointer; border-radius:6px; backdrop-filter:blur(4px); }
+    .prev{ left:12px }
+    .next{ right:12px }
 
-    /* Butoane */
-    .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px; height: 44px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(0,0,0,.5);
-      color: #fff;
-      font-size: 22px;
-      cursor: pointer;
-      display: grid; place-items: center;
-      transition: background .2s;
-    }
-    .arrow:hover { background: rgba(0,0,0,.8); }
-    .prev { left: 14px; }
-    .next { right: 14px; }
+    .dots{ position:absolute; left:50%; transform:translateX(-50%); bottom:12px; display:flex; gap:8px }
+    .dot{ width:10px; height:10px; border-radius:50%; border:1px solid rgba(255,255,255,0.5); background:transparent; padding:0; cursor:pointer }
+    .dot.active{ background:var(--accent) }
 
-    /* Buline */
-    .dots {
-      position: absolute;
-      left: 50%; bottom: 12px;
-      transform: translateX(-50%);
-      display: flex; gap: 8px;
-      background: rgba(0,0,0,.35);
-      padding: 6px 10px;
-      border-radius: 999px;
-      backdrop-filter: blur(2px);
-    }
-    .dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: #bbb;
-      opacity: .6;
-      border: 0;
-      cursor: pointer;
-    }
-    .dot.active { background: #fff; opacity: 1; }
+    /* small caption area (opțional) */
+    .caption{ position:absolute; left:12px; bottom:12px; background:linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2)); padding:8px 12px; border-radius:6px; font-size:14px }
+
+    /* responsive tweaks */
+    @media (max-width:600px){ .control{ padding:6px 8px } .caption{ font-size:13px } }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1 style="margin:0 0 14px">Portfolio online</h1>
 
-    <div class="carousel" id="carousel">
-      <div class="slides">
-        <img src="poza1.jpg" alt="Foto 1">
-        <img src="poza2.jpg" alt="Foto 2">
-        <img src="poza3.jpg" alt="Foto 3">
-        <img src="poza4.jpg" alt="Foto 4">
-      </div>
+  <!--
+    Instrucțiuni:
+    - Pune imaginile tale (.jpg/.png) în același folder cu acest fișier și adaugă <img src="..."> în blocul .slides.
+    - Sau înlocuiește src-urile existente cu fișierele tale.
+    - Dacă încarci numai o fotografie, slideshow-ul tot va funcționa (se va repeta aceeași imagine).
+    - Pentru a schimba timpul dintre imagini modifică variabila `intervalMs` din script (în milisecunde).
+  -->
 
-      <button class="arrow prev" aria-label="Înainte">&#10094;</button>
-      <button class="arrow next" aria-label="Următor">&#10095;</button>
-
-      <div class="dots" aria-label="Indicatori">
-        <!-- se populează din JS -->
-      </div>
+  <div class="carousel" aria-label="Slideshow fotografii">
+    <div class="slides">
+      <!-- Adaugă/înlocuiește imaginile aici -->
+      <img src="photo1.jpg" alt="Fotografie 1">
+      <img src="photo2.jpg" alt="Fotografie 2">
+      <img src="photo3.jpg" alt="Fotografie 3">
+      <!-- Dacă ai doar o fotografie, lasă doar un <img> sau lasă toate cu același src -->
     </div>
+
+    <button class="control prev" aria-label="Anterior">◀</button>
+    <button class="control next" aria-label="Următor">▶</button>
+
+    <div class="dots" aria-hidden="false"></div>
+
+    <div class="caption" id="caption">Portfolio — fotografie</div>
   </div>
 
   <script>
-    // === Setup ===
-    const root = document.getElementById('carousel');
-    const track = root.querySelector('.slides');
-    const slides = [...track.children];
-    const prev = root.querySelector('.prev');
-    const next = root.querySelector('.next');
-    const dotsWrap = root.querySelector('.dots');
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const slides = Array.from(document.querySelectorAll('.slides img'));
+      const prevBtn = document.querySelector('.prev');
+      const nextBtn = document.querySelector('.next');
+      const dotsContainer = document.querySelector('.dots');
+      const caption = document.getElementById('caption');
 
-    let index = 0;
-    let autoTimer = null;
-    const INTERVAL = 3500;
+      if(slides.length === 0){
+        // fallback: afișează un mesaj simplu
+        const c = document.createElement('div'); c.style.padding='20px'; c.style.color='#fff'; c.textContent = 'Nu există imagini în .slides. Pune imaginile în același folder cu acest fișier și actualizează src-urile.';
+        document.querySelector('.carousel').innerHTML = ''; document.querySelector('.carousel').appendChild(c);
+        return;
+      }
 
-    // Creează buline
-    slides.forEach((_, i) => {
-      const b = document.createElement('button');
-      b.className = 'dot' + (i === 0 ? ' active' : '');
-      b.setAttribute('aria-label', 'Slide ' + (i+1));
-      b.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(b);
+      let current = 0;
+      const intervalMs = 5000; // schimbă aici timpul (5000 = 5 secunde)
+      let timer = null;
+
+      // creați dot-uri doar dacă sunt mai multe imagini
+      if(slides.length > 1){
+        slides.forEach((s,i)=>{
+          const d = document.createElement('button'); d.className='dot'; d.title = 'Imagine ' + (i+1);
+          d.addEventListener('click', ()=>{ stop(); show(i); start(); });
+          dotsContainer.appendChild(d);
+        });
+      } else {
+        // ascunde controalele dacă e o singură imagine
+        prevBtn.style.display = 'none'; nextBtn.style.display = 'none'; dotsContainer.style.display = 'none';
+      }
+
+      function updateCaption(i){
+        const alt = slides[i].getAttribute('alt') || '';
+        caption.textContent = alt ? `${alt}` : 'Fotografie';
+      }
+
+      function show(n){
+        slides.forEach((s, i)=> s.classList.toggle('active', i===n));
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((d,i)=> d.classList.toggle('active', i===n));
+        current = n;
+        updateCaption(n);
+      }
+
+      function next(){ show((current + 1) % slides.length); }
+      function prev(){ show((current - 1 + slides.length) % slides.length); }
+
+      nextBtn.addEventListener('click', ()=>{ stop(); next(); start(); });
+      prevBtn.addEventListener('click', ()=>{ stop(); prev(); start(); });
+
+      // navigare cu tastele săgeți
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'ArrowLeft') prevBtn.click();
+        if(e.key === 'ArrowRight') nextBtn.click();
+      });
+
+      // pauză la hover (desktop)
+      const carousel = document.querySelector('.carousel');
+      carousel.addEventListener('mouseenter', stop);
+      carousel.addEventListener('mouseleave', start);
+
+      function start(){ if(slides.length <= 1) return; timer = setInterval(next, intervalMs); }
+      function stop(){ if(timer) { clearInterval(timer); timer = null; } }
+
+      // inițializare
+      show(0);
+      start();
     });
-    const dots = [...dotsWrap.children];
-
-    // === Funcții ===
-    function goTo(i) {
-      index = (i + slides.length) % slides.length;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      dots.forEach((d, di) => d.classList.toggle('active', di === index));
-    }
-
-    function nextSlide() { goTo(index + 1); }
-    function prevSlide() { goTo(index - 1); }
-
-    function startAuto() { stopAuto(); autoTimer = setInterval(nextSlide, INTERVAL); }
-    function stopAuto() { if (autoTimer) clearInterval(autoTimer); }
-
-    // === Evenimente ===
-    next.addEventListener('click', () => { nextSlide(); startAuto(); });
-    prev.addEventListener('click', () => { prevSlide(); startAuto(); });
-
-    // Autoplay + pauză la hover
-    root.addEventListener('mouseenter', stopAuto);
-    root.addEventListener('mouseleave', startAuto);
-
-    // Swipe (touch)
-    let startX = 0, dx = 0, touching = false;
-
-    root.addEventListener('touchstart', (e) => {
-      touching = true;
-      startX = e.touches[0].clientX;
-      stopAuto();
-    }, {passive:true});
-
-    root.addEventListener('touchmove', (e) => {
-      if (!touching) return;
-      dx = e.touches[0].clientX - startX;
-    }, {passive:true});
-
-    root.addEventListener('touchend', () => {
-      if (!touching) return;
-      if (dx > 50) prevSlide();
-      else if (dx < -50) nextSlide();
-      touching = false; dx = 0;
-      startAuto();
-    });
-
-    // Navigare din tastatură
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'ArrowRight') nextSlide();
-    });
-
-    // Pornește
-    goTo(0);
-    startAuto();
   </script>
-<footer class="site-footer">
-  © <span id="year"></span> Iliesi Titus Emanuel. Toate drepturile rezervate.
-  <small>Proprietate intelectuală — folosire și distribuire permisă doar cu acordul autorului.</small>
-</footer>
-
 </body>
 </html>
