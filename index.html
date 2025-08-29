@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio online</title>
+  <style>
+    body { margin:0; font-family:system-ui, Arial, sans-serif; background:#111; color:#fff; }
+    .wrap { max-width: 900px; margin: 40px auto; padding: 0 16px; }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;         /* înălțime automată, păstrează raportul */
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.5);
+      background: #000;
+    }
+
+    .slides {
+      display: flex;
+      height: 100%;
+      transition: transform .6s ease;
+    }
+
+    .slides img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex: 0 0 100%;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none; /* ca să nu “agațe” swipe-ul */
+    }
+
+    /* Butoane */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px; height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(0,0,0,.5);
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      display: grid; place-items: center;
+      transition: background .2s;
+    }
+    .arrow:hover { background: rgba(0,0,0,.8); }
+    .prev { left: 14px; }
+    .next { right: 14px; }
+
+    /* Buline */
+    .dots {
+      position: absolute;
+      left: 50%; bottom: 12px;
+      transform: translateX(-50%);
+      display: flex; gap: 8px;
+      background: rgba(0,0,0,.35);
+      padding: 6px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(2px);
+    }
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #bbb;
+      opacity: .6;
+      border: 0;
+      cursor: pointer;
+    }
+    .dot.active { background: #fff; opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 style="margin:0 0 14px">Portfolio online</h1>
+
+    <div class="carousel" id="carousel">
+      <div class="slides">
+        <img src="poza1.jpg" alt="Foto 1">
+        <img src="poza2.jpg" alt="Foto 2">
+        <img src="poza3.jpg" alt="Foto 3">
+        <img src="poza4.jpg" alt="Foto 4">
+      </div>
+
+      <button class="arrow prev" aria-label="Înainte">&#10094;</button>
+      <button class="arrow next" aria-label="Următor">&#10095;</button>
+
+      <div class="dots" aria-label="Indicatori">
+        <!-- se populează din JS -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // === Setup ===
+    const root = document.getElementById('carousel');
+    const track = root.querySelector('.slides');
+    const slides = [...track.children];
+    const prev = root.querySelector('.prev');
+    const next = root.querySelector('.next');
+    const dotsWrap = root.querySelector('.dots');
+
+    let index = 0;
+    let autoTimer = null;
+    const INTERVAL = 3500;
+
+    // Creează buline
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.className = 'dot' + (i === 0 ? ' active' : '');
+      b.setAttribute('aria-label', 'Slide ' + (i+1));
+      b.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(b);
+    });
+    const dots = [...dotsWrap.children];
+
+    // === Funcții ===
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, di) => d.classList.toggle('active', di === index));
+    }
+
+    function nextSlide() { goTo(index + 1); }
+    function prevSlide() { goTo(index - 1); }
+
+    function startAuto() { stopAuto(); autoTimer = setInterval(nextSlide, INTERVAL); }
+    function stopAuto() { if (autoTimer) clearInterval(autoTimer); }
+
+    // === Evenimente ===
+    next.addEventListener('click', () => { nextSlide(); startAuto(); });
+    prev.addEventListener('click', () => { prevSlide(); startAuto(); });
+
+    // Autoplay + pauză la hover
+    root.addEventListener('mouseenter', stopAuto);
+    root.addEventListener('mouseleave', startAuto);
+
+    // Swipe (touch)
+    let startX = 0, dx = 0, touching = false;
+
+    root.addEventListener('touchstart', (e) => {
+      touching = true;
+      startX = e.touches[0].clientX;
+      stopAuto();
+    }, {passive:true});
+
+    root.addEventListener('touchmove', (e) => {
+      if (!touching) return;
+      dx = e.touches[0].clientX - startX;
+    }, {passive:true});
+
+    root.addEventListener('touchend', () => {
+      if (!touching) return;
+      if (dx > 50) prevSlide();
+      else if (dx < -50) nextSlide();
+      touching = false; dx = 0;
+      startAuto();
+    });
+
+    // Navigare din tastatură
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    // Pornește
+    goTo(0);
+    startAuto();
+  </script>
+<footer class="site-footer">
+  © <span id="year"></span> Iliesi Titus Emanuel. Toate drepturile rezervate.
+  <small>Proprietate intelectuală — folosire și distribuire permisă doar cu acordul autorului.</small>
+</footer>
+
+</body>
+</html>
