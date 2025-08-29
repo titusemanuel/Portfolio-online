@@ -12,20 +12,24 @@
             background-color: #f5f5f5;
         }
 
+        /* Meniu negru cu alb */
         header {
-            background-color: #333;
+            background-color: #000;
             color: white;
-            padding: 20px 0;
-            text-align: center;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        header h1 {
-            margin: 0;
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
         nav a {
             color: white;
-            margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
         }
@@ -35,7 +39,7 @@
         }
 
         section {
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
         }
 
@@ -59,10 +63,26 @@
         }
 
         footer {
-            background-color: #333;
+            background-color: #000;
             color: white;
             padding: 20px 0;
             text-align: center;
+        }
+
+        /* Săgeată scroll sus */
+        #scrollTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
         }
 
         @media (max-width: 768px) {
@@ -72,21 +92,15 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;"> <!-- Blochează click dreapta -->
 
 <header>
-    <h1>Portfolio Personal</h1>
+    <h1 style="margin:0;">Portfolio Personal</h1>
     <nav>
-        <a href="#about">Despre mine</a>
         <a href="#projects">Proiecte</a>
         <a href="#contact">Contact</a>
     </nav>
 </header>
-
-<section id="about">
-    <h2>Despre mine</h2>
-    <p>Sunt un dezvoltator pasionat de web design și crearea de proiecte online creative. Acesta este portofoliul meu personal unde poți vedea lucrările mele.</p>
-</section>
 
 <section id="projects">
     <h2>Proiecte</h2>
@@ -106,6 +120,26 @@
 <footer>
     <p>© 2025 Portfolio Personal. Toate drepturile rezervate.</p>
 </footer>
+
+<!-- Săgeata scroll sus -->
+<button onclick="scrollToTop()" id="scrollTopBtn">&#8679;</button>
+
+<script>
+    // Afișare buton scroll sus
+    const scrollBtn = document.getElementById('scrollTopBtn');
+
+    window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            scrollBtn.style.display = "block";
+        } else {
+            scrollBtn.style.display = "none";
+        }
+    };
+
+    function scrollToTop() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+</script>
 
 </body>
 </html>
