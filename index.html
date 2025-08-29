@@ -1,1 +1,181 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Foto</title>
+    <style>
+        /* ====== Stil general ====== */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
 
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem 0;
+        }
+
+        /* ====== Carusel ====== */
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 2rem auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            background-color: white;
+        }
+
+        .carousel-slide {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            opacity: 1;
+            position: relative;
+        }
+
+        /* ====== Butoane navigare ====== */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        /* ====== Indicatori (dots) ====== */
+        .dots {
+            text-align: center;
+            margin-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            display: inline-block;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #333;
+        }
+
+        /* ====== Responsive ====== */
+        @media (max-width: 600px) {
+            .prev, .next {
+                padding: 0.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Portfolio Foto</h1>
+    </header>
+
+    <section class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-slide active">
+                <img src="Poze1" alt="Foto 1">
+            </div>
+            <div class="carousel-slide">
+                <img src="poze2" alt="Foto 2">
+            </div>
+            <div class="carousel-slide">
+                <img src="poze3" alt="Foto 3">
+            </div>
+            <div class="carousel-slide">
+                <img src="poze4" alt="Foto 4">
+            </div>
+        </div>
+
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+
+        <div class="dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+        </div>
+    </section>
+
+    <script>
+        const slides = document.querySelectorAll('.carousel-slide');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        const dots = document.querySelectorAll('.dot');
+
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showSlide(currentIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentIndex = parseInt(dot.dataset.index);
+                showSlide(currentIndex);
+            });
+        });
+
+        // Auto slide la 5 secunde
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }, 5000);
+    </script>
+</body>
+</html>
