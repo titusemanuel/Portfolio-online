@@ -3,59 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slideshow Simplu</title>
+    <title>Slideshow Simplu Comentat</title>
+    
+    <!-- Stilizare simplă pentru slideshow -->
     <style>
         body {
-            display: flex;
+            display: flex; /* Centrează div-ul pe verticală și orizontală */
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
+            height: 100vh; /* Înălțimea paginii = 100% din ecran */
             margin: 0;
+            background-color: #f0f0f0;
         }
+
         #slideshow {
-            width: 600px;
-            height: 400px;
-            overflow: hidden;
-            border: 2px solid #ccc;
-            border-radius: 10px;
+            width: 600px;  /* Lățimea containerului */
+            height: 400px; /* Înălțimea containerului */
+            overflow: hidden; /* Ascunde orice parte din imagine care depășește containerul */
+            border: 2px solid #ccc; /* Chenar gri */
+            border-radius: 10px; /* Colțuri rotunjite */
         }
+
         #slideshow img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100%;   /* Imaginea ocupă toată lățimea containerului */
+            height: 100%;  /* Imaginea ocupă toată înălțimea containerului */
+            object-fit: cover; /* Imaginea se scalează fără a se deforma */
         }
     </style>
 </head>
 <body>
+
+    <!-- Container pentru slideshow -->
     <div id="slideshow">
-        <img src="poza1.jpg" alt="Poza1" id="slide">
-        <img src="poza2.jpg" alt="Poza2" id="slide">
-        <img src="poza3.jpg" alt="Poza3" id="slide">
-        <img src="poza4.jpg" alt="Poza4" id="slide">
+        <!-- Imaginea curentă va fi afișată aici -->
+        <img src="poza1.jpg" alt="Poza 1" id="slide">
     </div>
 
     <script>
-        // Lista cu fotografii
-        const imagini = <img src="poza1.jpg" alt="Poza1" id="slide">
-        <img src="poza2.jpg" alt="Poza2" id="slide">
-        <img src="poza3.jpg" alt="Poza3" id="slide">
-        <img src="poza4.jpg" alt="Poza4" id="slide">
+        // Lista cu fotografii pe care le vrei în slideshow
+        const imagini = [
+            "poza1.jpg", // Poza 1
+            "poza2.jpg", // Poza 2
+            "poza3.jpg", // Poza 3
+            "poza4.jpg"  // Poza 4
+        ];
+
+        // Variabila index pentru a ști ce poză este afișată în prezent
         let index = 0;
+
+        // Obține elementul <img> din HTML unde se vor afișa pozele
         const slide = document.getElementById("slide");
 
+        // Funcție care schimbă poza curentă
         function schimbaPoza() {
-            index++;
+            index++; // Treci la următoarea poză
             if (index >= imagini.length) {
-                index = 0; // Reîncepe de la prima poză
+                index = 0; // Dacă ajungi la ultima, revii la prima poză
             }
-            slide.src = imagini[index];
+            slide.src = imagini[index]; // Actualizează sursa imaginii
         }
 
-        // Schimbă poza la fiecare 3 secunde (3000 ms)
+        // Setează schimbarea automată a pozelor la fiecare 3 secunde (3000 ms)
         setInterval(schimbaPoza, 3000);
     </script>
+
 </body>
 </html>
-
-
