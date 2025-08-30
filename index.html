@@ -65,6 +65,88 @@
     @media (max-width:720px) {
       .photo { width:100%; }
     }
+    <!-- ✅ CSS-ul pentru lightbox -->
+  <style>
+    /* Lightbox container */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+      text-align: center;
+    }
+
+    /* Imaginea în lightbox */
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 80%;
+      margin: auto;
+      border-radius: 10px;
+    }
+
+    /* Buton close */
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 45px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Descriere */
+    #caption {
+      margin: 15px auto;
+      color: #ddd;
+      font-size: 18px;
+      max-width: 80%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ GALERIA TA -->
+  <section id="gallery" class="gallery">
+    <div class="photo">
+      <img src="poza1.JPG" alt="Poza 1" onclick="openLightbox(this, 'Descriere pentru poza 1')" oncontextmenu="return false;">
+      <span class="author">Iliesi Titus Emanuel</span>
+    </div>
+    <div class="photo">
+      <img src="poza2.JPG" alt="Poza 2" onclick="openLightbox(this, 'Descriere pentru poza 2')" oncontextmenu="return false;">
+      <span class="author">Iliesi Titus Emanuel</span>
+    </div>
+    <!-- 🔽 aici pui restul pozelor exact ca mai sus -->
+  </section>
+
+  <!-- ✅ LIGHTBOX (pop-up fullscreen) -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <div id="caption"></div>
+  </div>
+
+  <!-- ✅ SCRIPT-ul pentru lightbox -->
+  <script>
+    function openLightbox(img, description) {
+      document.getElementById("lightbox").style.display = "block";
+      document.getElementById("lightbox-img").src = img.src;
+      document.getElementById("caption").innerText = description;
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
   </style>
 </head>
 <body>
