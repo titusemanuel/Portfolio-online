@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Portofoliu Fotografic</title>
   <style>
-    :root{ --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#60a5fa; --glass: rgba(255,255,255,0.04)}
-    *{box-sizing:border-box}
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#60a5fa;--glass: rgba(255,255,255,0.04)}
+    *{box-sizing:border-box;}
     body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#e6eef8;background:linear-gradient(180deg,#061226 0%, #081827 60%);}
-
     header{position:sticky;top:0;background:linear-gradient(90deg, rgba(6,18,38,0.85), rgba(6,18,38,0.6));backdrop-filter: blur(6px);z-index:50;border-bottom:1px solid rgba(255,255,255,0.03)}
     .container{max-width:1100px;margin:0 auto;padding:20px}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -17,47 +16,24 @@
     nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0}
     nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px}
     nav a:hover{color:white;background:var(--glass)}
-
     .hero{padding:48px 0 24px}
     .hero h1{margin:0;font-size:34px;line-height:1.05}
     .hero p{color:var(--muted);margin-top:8px}
-
-    /* carousel */
     .carousel{position:relative;max-width:100%;overflow:hidden;border-radius:12px;margin-top:22px}
-    .carousel-track{display:flex;transition:transform 0.6s ease-in-out}
-    .carousel img{min-width:100%;height:500px;object-fit:cover;cursor:pointer}
-    .carousel button{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:white;padding:12px;border-radius:50%;cursor:pointer;z-index:10}
-    .carousel button:hover{background:rgba(0,0,0,0.7)}
-    .carousel .prev{left:16px}
-    .carousel .next{right:16px}
-
-    /* copyright footer */
-    footer{padding:24px 0;margin-top:36px;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted);}
-    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px}
-
-    /* custom context menu for images */
-    .img-menu{position:fixed;z-index:200;min-width:220px;background:rgba(3,7,18,0.95);color:#e6eef8;padding:12px;border-radius:10px;box-shadow:0 6px 30px rgba(2,6,23,0.6);display:none;border:1px solid rgba(255,255,255,0.04)}
-    .img-menu h4{margin:0 0 6px 0;font-size:14px}
-    .img-menu p{margin:0;font-size:13px;color:var(--muted)}
-    .img-menu .btns{display:flex;gap:8px;margin-top:10px}
-    .btn{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.02);cursor:pointer;font-size:13px;color:var(--muted)}
-    .btn:hover{background:var(--glass);color:white}
-
-    /* fixed arrows bottom-left & bottom-right */
-    .arrow{position:fixed;bottom:18px;z-index:80;width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));backdrop-filter: blur(6px);cursor:pointer;border:1px solid rgba(255,255,255,0.03)}
-    .arrow svg{width:22px;height:22px;fill:none;stroke:var(--accent);stroke-width:2}
-    .arrow.left{left:18px}
-    .arrow.right{right:18px}
-
-    /* contact section */
+    .carousel-track{display:flex;transition:transform 0.5s ease-in-out}
+    .slide{min-width:100%;position:relative;}
+    .slide img{width:100%;display:block;cursor:pointer}
+    .credit{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:14px;padding:4px 8px;border-radius:5px;font-family:Arial,sans-serif}
+    .prev,.next{position:absolute;top:50%;transform:translateY(-50%);background-color:rgba(0,0,0,0.6);color:white;border:none;padding:10px;cursor:pointer;border-radius:50%;z-index:10}
+    .prev{left:10px} .next{right:10px}
     #contact{margin-top:36px;padding:22px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));border:1px solid rgba(255,255,255,0.02)}
     form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     form input, form textarea{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
-    form textarea{grid-column:1/ -1;min-height:120px}
+    form textarea{grid-column:1/-1;min-height:120px}
     .actions{display:flex;justify-content:flex-end}
     .btn-primary{background:linear-gradient(90deg,var(--accent),#7dd3fc);border:none;color:#04263b;padding:10px 14px;border-radius:10px;cursor:pointer}
-
-    /* responsive */
+    footer{padding:24px 0;margin-top:36px;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted);}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px}
     @media (max-width:720px){.hero h1{font-size:22px}.carousel img{height:260px}form{grid-template-columns:1fr}.footer-inner{flex-direction:column;align-items:flex-start}}
   </style>
 </head>
@@ -71,7 +47,6 @@
           <div style="font-size:12px;color:var(--muted)">Fotograf | Portofoliu</div>
         </div>
       </div>
-
       <nav>
         <ul>
           <li><a href="#top">Acasă</a></li>
@@ -89,185 +64,26 @@
       <p>O selecție reprezentativă de fotografii. Click dreapta pe imagine pentru a vedea autorul și fotograful.</p>
     </section>
 
-<section id="galerie" aria-label="Galerie fotografii">
-  <div class="carousel">
-    <div class="carousel-track">
-      <div class="slide">
-        <img src="poza1.JPG" alt="Poza 1" oncontextmenu="return false;">
-        <span class="credit">Autor / Fotograf: Ilieși Titus Emanuel</span>
+    <section id="galerie">
+      <div class="carousel">
+        <div class="carousel-track">
+          <div class="slide"><img src="poza1.JPG" alt="Poza 1" data-author="Ilieși Titus Emanuel" data-photographer="Ilieși Titus Emanuel"><span class="credit">Autor/Fotograf: Ilieși Titus Emanuel</span></div>
+          <div class="slide"><img src="poza2.JPG" alt="Poza 2" data-author="Ilieși Titus Emanuel" data-photographer="Ilieși Titus Emanuel"><span class="credit">Autor/Fotograf: Ilieși Titus Emanuel</span></div>
+          <div class="slide"><img src="poza3.JPG" alt="Poza 3" data-author="Ilieși Titus Emanuel" data-photographer="Ilieși Titus Emanuel"><span class="credit">Autor/Fotograf: Ilieși Titus Emanuel</span></div>
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
       </div>
-      <div class="slide">
-        <img src="poza2.JPG" alt="Poza 2" oncontextmenu="return false;">
-        <span class="credit">Autor / Fotograf: Ilieși Titus Emanuel</span>
-      </div>
-      <div class="slide">
-        <img src="poza3.JPG" alt="Poza 3" oncontextmenu="return false;">
-        <span class="credit">Autor / Fotograf: Ilieși Titus Emanuel</span>
-      </div>
-      <div class="slide">
-         <img src="poza4.JPG" alt="Poza 4" oncontextmenu="return false;">
-        <span class="credit">Autor / Fotograf: Ilieși Titus Emanuel</span>
-      </div>
-      <div class="slide">
-         <img src="poza5.JPG" alt="Poza 5" oncontextmenu="return false;">
-        <span class="credit">Autor / Fotograf: Ilieși Titus Emanuel</span>
-      </div>
-    </div>
-    <button class="prev">&#10094;</button>
-    <button class="next">&#10095;</button>
-  </div>
-</section>
+    </section>
 
-<style>
-.carousel {
-  position: relative;
-  max-width: 900px;
-  margin: auto;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-  min-width: 100%;
-  position: relative;
-}
-
-.slide img {
-  width: 100%;
-  display: block;
-}
-
-.credit {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  font-size: 14px;
-  padding: 4px 8px;
-  border-radius: 5px;
-  font-family: Arial, sans-serif;
-}
-
-.prev, .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.6);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 10;
-}
-
-.prev { left: 10px; }
-.next { right: 10px; }
-</style>
-
-<script>
-const track = document.querySelector('.carousel-track');
-const slides = Array.from(track.children);
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
-let currentIndex = 0;
-
-function updateSlide(index) {
-  const slideWidth = slides[0].getBoundingClientRect().width;
-  track.style.transform = `translateX(-${index * slideWidth}px)`;
-}
-
-// Butoane manuale
-prevButton.addEventListener('click', () => {
-  currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
-  updateSlide(currentIndex);
-});
-
-nextButton.addEventListener('click', () => {
-  currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
-  updateSlide(currentIndex);
-});
-
-// Slideshow automat
-setInterval(() => {
-  currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
-  updateSlide(currentIndex);
-}, 3000); // schimbă poza la 3 secunde
-
-// Blochează click dreapta pe toate pozele
-slides.forEach(slide => {
-  slide.addEventListener("contextmenu", e => e.preventDefault());
-});
-<script>
-const track = document.querySelector('.carousel-track');
-const slides = Array.from(track.children);
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
-let currentIndex = 0;
-
-function updateSlide(index) {
-  const slideWidth = slides[0].getBoundingClientRect().width;
-  track.style.transform = `translateX(-${index * slideWidth}px)`;
-}
-
-prevButton.addEventListener('click', () => {
-  currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
-  updateSlide(currentIndex);
-});
-
-nextButton.addEventListener('click', () => {
-  currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
-  updateSlide(currentIndex);
-});
-
-// Blochează click dreapta pe toate pozele
-slides.forEach(slide => {
-  slide.addEventListener("contextmenu", e => e.preventDefault());
-});
-</script>
-
-<style>
-.carousel-track {
-  display: flex;
-  overflow: hidden;
-}
-
-.slide {
-  position: relative;
-  min-width: 100%;
-}
-
-.slide img {
-  width: 100%;
-  display: block;
-}
-
-.credit {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  font-size: 14px;
-  padding: 4px 8px;
-  border-radius: 5px;
-  font-family: Arial, sans-serif;
-}
-</style>
-<section id="despre" style="margin-top:28px">
+    <section id="despre" style="margin-top:28px">
       <h3>Despre</h3>
       <p style="color:var(--muted)">Sunt fotograf pasionat de portrete și peisaje. Acest portofoliu este un exemplu; înlocuiește imaginile și actualizează atributele data-author / data-photographer pentru creditare corectă.</p>
     </section>
 
     <section id="contact">
-      <h3>Contact Test pagină </h3>
-      <form onsubmit="event.preventDefault(); alert('Test pagină">
+      <h3>Contact Test pagină</h3>
+      <form onsubmit="event.preventDefault(); alert('Formular trimis cu succes!');">
         <input type="text" placeholder="Nume" required />
         <input type="email" placeholder="Email" required />
         <textarea placeholder="Mesaj"></textarea>
@@ -285,87 +101,5 @@ slides.forEach(slide => {
     </footer>
   </main>
 
-  <!-- meniul custom pentru click dreapta pe imagini -->
-  <div id="imgMenu" class="img-menu" role="dialog" aria-hidden="true">
-    <h4 id="imgTitle">Informații imagine</h4>
-    <p id="imgAuthor">Autor: —</p>
-    <p id="imgPhoto">Fotograf: —</p>
-    <div class="btns">
-      <button id="openImgBtn" class="btn">Deschide imaginea</button>
-      <button id="copyCredit" class="btn">Copiază credit</button>
-      <button id="closeMenu" class="btn">Închide</button>
-    </div>
-  </div>
-
-  <!-- săgeți bottom-left & bottom-right care duc în sus -->
-  <div class="arrow left" title="Sus (scroll)">
-    <svg viewBox="0 0 24 24" aria-hidden><path d="M18 15l-6-6-6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-  </div>
-  <div class="arrow right" title="Sus (scroll)">
-    <svg viewBox="0 0 24 24" aria-hidden><path d="M18 15l-6-6-6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-  </div>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Carousel logic
-    const track = document.querySelector('.carousel-track');
-    const slides = Array.from(track.children);
-    const prevButton = document.querySelector('.carousel .prev');
-    const nextButton = document.querySelector('.carousel .next');
-    let currentIndex = 0;
-
-    function updateCarousel(){
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-
-    prevButton.addEventListener('click', ()=>{
-      currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
-      updateCarousel();
-    });
-    nextButton.addEventListener('click', ()=>{
-      currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
-      updateCarousel();
-    });
-
-    // context menu for images
-    const imgMenu = document.getElementById('imgMenu');
-    const imgTitle = document.getElementById('imgTitle');
-    const imgAuthor = document.getElementById('imgAuthor');
-    const imgPhoto = document.getElementById('imgPhoto');
-    const openImgBtn = document.getElementById('openImgBtn');
-    const copyCredit = document.getElementById('copyCredit');
-    const closeMenu = document.getElementById('closeMenu');
-
-    document.addEventListener('contextmenu', function(e){
-      const el = e.target;
-      if(el && el.tagName === 'IMG' && el.closest('.carousel')){
-        e.preventDefault();
-        const author = el.dataset.author || 'necunoscut';
-        const photographer = el.dataset.photographer || 'necunoscut';
-        imgTitle.textContent = el.alt || 'Imagine';
-        imgAuthor.textContent = 'Autor: ' + author;
-        imgPhoto.textContent = 'Fotograf: ' + photographer;
-        openImgBtn.onclick = () => window.open(el.src, '_blank');
-        copyCredit.onclick = () => {
-          const text = `${el.alt || 'Imagine'} — Autor: ${author}; Fotograf: ${photographer}`;
-          navigator.clipboard?.writeText(text).then(()=>{
-            copyCredit.textContent = 'Copiat!';
-            setTimeout(()=> copyCredit.textContent = 'Copiază credit', 1400);
-          });
-        }
-        imgMenu.style.display = 'block';
-        imgMenu.style.left = e.clientX + 'px';
-        imgMenu.style.top = e.clientY + 'px';
-      }
-    });
-    document.addEventListener('click', function(e){if(!imgMenu.contains(e.target)){imgMenu.style.display='none'}});
-    closeMenu.addEventListener('click', ()=> imgMenu.style.display='none');
-
-    // arrows scroll to top
-    document.querySelectorAll('.arrow').forEach(el=>{
-      el.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
-    });
-  </script>
-</body>
-</html>
+  <!-- Custom context menu -->
+  <div id="imgMenu" class="img-menu" style="display:none;position:fixed;z-index:200;min-width:220px;background:rgba(3
