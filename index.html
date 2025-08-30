@@ -126,43 +126,47 @@
 </header>
 
 <main class="container">
+  const galleryImgs = document.querySelectorAll('.gallery .photo picture img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+let currentIndex = 0;
+
+galleryImgs.forEach((img, index) => {
+  img.addEventListener('click', () => {
+    currentIndex = index;
+    lightboxImg.src = img.src;
+    lightbox.style.display = 'flex';
+  });
+});
+
 
 <section id="gallery" class="gallery">
   <div class="photo">
-    <picture>
+    <picture class="lightbox-img-wrapper">
       <source srcset="poza1.webp" type="image/webp">
-      <img src="poza1.JPG" alt="Poza 1" loading="lazy" oncontextmenu="return false;">
+      <img src="poza1.JPG" alt="Poza 1" loading="lazy" oncontextmenu="return false">
     </picture>
     <span class="author">Iliesi Titus Emanuel</span>
   </div>
-  
+
   <div class="photo">
-    <picture>
+    <picture class="lightbox-img-wrapper">
       <source srcset="poza2.webp" type="image/webp">
-      <img src="poza2.JPG" alt="Poza 2" loading="lazy" oncontextmenu="return false;">
+      <img src="poza2.JPG" alt="Poza 2" loading="lazy" oncontextmenu="return false">
     </picture>
     <span class="author">Iliesi Titus Emanuel</span>
   </div>
 
   <div class="photo">
-    <picture>
+    <picture class="lightbox-img-wrapper">
       <source srcset="poza3.webp" type="image/webp">
-      <img src="poza3.JPG" alt="Poza 3" loading="lazy" oncontextmenu="return false;">
+      <img src="poza3.JPG" alt="Poza 3" loading="lazy" oncontextmenu="return false">
     </picture>
     <span class="author">Iliesi Titus Emanuel</span>
   </div>
 
-  <div class="photo">
-    <picture>
-      <source srcset="poza4.webp" type="image/webp">
-      <img src="poza4.JPG" alt="Poza 4" loading="lazy" oncontextmenu="return false;">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <!-- Adaugă restul pozelor la fel -->
+  <!-- Continuă la fel pentru toate pozele tale -->
 </section>
-
 
 
 
