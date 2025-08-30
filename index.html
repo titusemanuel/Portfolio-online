@@ -1,117 +1,114 @@
 <!doctype html>
 <html lang="ro">
 <head>  
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Portofoliu Fotografic</title>
-<style>
-  body {margin:0;font-family:Arial,sans-serif;background:#061226;color:#e6eef8;}
-  header {position:sticky;top:0;background:#0b1220;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;z-index:10;}
-  header a {color:#9aa4b2;text-decoration:none;margin-left:16px;}
-  header a:hover {color:#60a5fa;}
-  .container {max-width:1100px;margin:0 auto;padding:20px;}
-  .gallery {display:none;gap:10px;margin-top:20px;display:flex;flex-wrap:wrap;}
-  .gallery img {width:calc(33% - 10px);border-radius:8px;cursor:pointer;margin-bottom:10px;}
-  footer {margin-top:36px;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,0.1);color:#9aa4b2;}
-  @media (max-width:720px) { .gallery img {width:100%;} }
-</style>
-</head>
-  <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portofoliu Fotografic</title>
   <style>
-    body {margin:0;font-family:Arial,sans-serif;background:#061226;color:#e6eef8;}
-    header {position:sticky;top:0;background:#0b1220;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;z-index:10;}
-    header a {color:#9aa4b2;text-decoration:none;margin-left:16px;}
-    header a:hover {color:#60a5fa;}
-    .container {max-width:1100px;margin:0 auto;padding:20px;}
-    .gallery {display:none;gap:10px;margin-top:20px;}
-    .gallery img {width:calc(33% - 10px);border-radius:8px;cursor:pointer;}
-    footer {margin-top:36px;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,0.1);color:#9aa4b2;}
-    @media (max-width:720px) { .gallery img {width:100%;} }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #061226;
+      color: #e6eef8;
+    }
 
-    /* Aici adaugi codul nou pentru nume și blocuri */
+    header {
+      position: sticky;
+      top: 0;
+      background: #0b1220;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    header a {
+      color: #9aa4b2;
+      text-decoration: none;
+      margin-left: 16px;
+    }
+
+    header a:hover {
+      color: #60a5fa;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
     .gallery {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
     }
 
     .photo {
-      position:relative;
-      width:calc(33% - 10px);
+      position: relative;
+      width: calc(33% - 10px);
     }
 
     .photo img {
-      width:100%;
-      border-radius:8px;
-      cursor:pointer;
-      display:block;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      display: block;
     }
 
     .photo .author {
-      position:absolute;
-      bottom:5px;
-      right:5px;
-      font-size:10px;
-      color:white;
-      background:rgba(0,0,0,0.5);
-      padding:2px 4px;
-      border-radius:4px;
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      font-size: 10px;
+      color: white;
+      background: rgba(0,0,0,0.5);
+      padding: 2px 4px;
+      border-radius: 4px;
     }
 
-    @media (max-width:720px) {
-      .photo { width:100%; }
+    @media (max-width: 720px) {
+      .photo { width: 100%; }
     }
-    <!-- ✅ CSS-ul pentru lightbox -->
-  <style>
-    /* Lightbox container */
-    .lightbox {
+
+    /* Lightbox */
+    #lightbox {
       display: none;
       position: fixed;
-      z-index: 9999;
-      padding-top: 60px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.9);
-      text-align: center;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
 
-    /* Imaginea în lightbox */
-    .lightbox-content {
+    #lightbox img {
       max-width: 90%;
-      max-height: 80%;
-      margin: auto;
-      border-radius: 10px;
+      max-height: 90%;
+      border-radius: 8px;
     }
 
-    /* Buton close */
-    .close {
+    #close, #prev, #next {
       position: absolute;
-      top: 20px;
-      right: 45px;
-      color: #fff;
-      font-size: 40px;
-      font-weight: bold;
+      color: white;
       cursor: pointer;
+      user-select: none;
     }
 
-    /* Descriere */
-    #caption {
-      margin: 15px auto;
-      color: #ddd;
-      font-size: 18px;
-      max-width: 80%;
-    }
-  </style>
-</head>
-<body>
+    #close { top: 20px; right: 30px; font-size: 40px; }
+    #prev { top: 50%; left: 20px; font-size: 60px; transform: translateY(-50%); }
+    #next { top: 50%; right: 20px; font-size: 60px; transform: translateY(-50%); }
 
+    footer {
+      margin-top: 36px;
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #9aa4b2;
+    }
   </style>
 </head>
 <body>
@@ -124,168 +121,71 @@
     <a href="#contact">Contact</a>
   </nav>
 </header>
+
 <main class="container">
-<section id="gallery" class="gallery">
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza1.webp" type="image/webp">
+  <section id="gallery" class="gallery">
+    <div class="photo">
       <img src="poza1.JPG" alt="Poza 1" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza2.webp" type="image/webp">
+      <span class="author">Iliesi Titus Emanuel</span>
+    </div>
+    <div class="photo">
       <img src="poza2.JPG" alt="Poza 2" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza3.webp" type="image/webp">
+      <span class="author">Iliesi Titus Emanuel</span>
+    </div>
+    <div class="photo">
       <img src="poza3.JPG" alt="Poza 3" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza4.webp" type="image/webp">
-      <img src="poza4.JPG" alt="Poza 4" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza5.webp" type="image/webp">
-      <img src="poza5.JPG" alt="Poza 5" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza6.webp" type="image/webp">
-      <img src="poza6.jpg" alt="Poza 6" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza7.webp" type="image/webp">
-      <img src="poza7.JPG" alt="Poza 7" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza9.webp" type="image/webp">
-      <img src="poza9.jpg" alt="Poza 9" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza17.webp" type="image/webp">
-      <img src="poza17.JPG" alt="Poza 17" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza18.webp" type="image/webp">
-      <img src="poza18.JPG" alt="Poza 18" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-
-  <div class="photo">
-    <picture class="lightbox-img-wrapper">
-      <source srcset="poza19.webp" type="image/webp">
-      <img src="poza19.JPG" alt="Poza 19" loading="lazy" oncontextmenu="return false">
-    </picture>
-    <span class="author">Iliesi Titus Emanuel</span>
-  </div>
-</section>
-
-
-
-
-
+      <span class="author">Iliesi Titus Emanuel</span>
+    </div>
+    <!-- Adaugă aici toate pozele tale în același mod -->
+  </section>
 </main>
 
 <!-- Lightbox -->
-<div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:1000;">
-  <span id="close" style="position:absolute;top:20px;right:30px;font-size:40px;color:white;cursor:pointer;">&times;</span>
-  <span id="prev" style="position:absolute;top:50%;left:20px;font-size:60px;color:white;cursor:pointer;">&#10094;</span>
-  <span id="next" style="position:absolute;top:50%;right:20px;font-size:60px;color:white;cursor:pointer;">&#10095;</span>
-  <img id="lightbox-img" src="" style="max-width:90%;max-height:90%;border-radius:8px;">
+<div id="lightbox">
+  <span id="close">&times;</span>
+  <span id="prev">&#10094;</span>
+  <span id="next">&#10095;</span>
+  <img id="lightbox-img" src="">
 </div>
 
-  
-  <!-- Footer cu drepturi de autor -->
 <footer>
   &copy; 2025 Iliesi Titus Emanuel. Toate drepturile rezervate.
 </footer>
 
 <script>
-const galleryLink = document.getElementById('link-gallery');
-const gallery = document.getElementById('gallery');
-const galleryImgs = document.querySelectorAll('#gallery img');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const closeBtn = document.getElementById('close');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
+  const galleryImgs = document.querySelectorAll('.gallery img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.getElementById('close');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
 
-let currentIndex = 0;
+  let currentIndex = 0;
 
-// Arată galeria la click
-galleryLink.addEventListener('click', (e) => {
-  e.preventDefault();
-  gallery.style.display = 'flex';
-  window.scrollTo({top: gallery.offsetTop, behavior: 'smooth'});
-});
-
-// Deschide lightbox la click pe poză
-galleryImgs.forEach((img, index) => {
-  img.addEventListener('click', () => {
-    currentIndex = index;
-    lightboxImg.src = img.src;
-    lightbox.style.display = 'flex';
+  galleryImgs.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      currentIndex = index;
+      lightboxImg.src = img.src;
+      lightbox.style.display = 'flex';
+    });
   });
-});
 
-// Închide lightbox
-closeBtn.addEventListener('click', () => {
-  lightbox.style.display = 'none';
-});
+  closeBtn.addEventListener('click', () => lightbox.style.display = 'none');
 
-// Navigare
-prevBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length;
-  lightboxImg.src = galleryImgs[currentIndex].src;
-});
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length;
+    lightboxImg.src = galleryImgs[currentIndex].src;
+  });
 
-nextBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % galleryImgs.length;
-  lightboxImg.src = galleryImgs[currentIndex].src;
-});
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % galleryImgs.length;
+    lightboxImg.src = galleryImgs[currentIndex].src;
+  });
 
-// Click în afara imaginii închide
-lightbox.addEventListener('click', e => {
-  if (e.target === lightbox) lightbox.style.display = 'none';
-});
- </script>
+  lightbox.addEventListener('click', e => {
+    if(e.target === lightbox) lightbox.style.display = 'none';
+  });
+</script>
 
 </body>
 </html>
-
-
