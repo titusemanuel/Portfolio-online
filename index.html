@@ -112,41 +112,6 @@
 </head>
 <body>
 
-  <!-- ✅ GALERIA TA -->
-  <section id="gallery" class="gallery">
-    <div class="photo">
-      <img src="poza1.JPG" alt="Poza 1" onclick="openLightbox(this, 'Descriere pentru poza 1')" oncontextmenu="return false;">
-      <span class="author">Iliesi Titus Emanuel</span>
-    </div>
-    <div class="photo">
-      <img src="poza2.JPG" alt="Poza 2" onclick="openLightbox(this, 'Descriere pentru poza 2')" oncontextmenu="return false;">
-      <span class="author">Iliesi Titus Emanuel</span>
-    </div>
-    <!-- 🔽 aici pui restul pozelor exact ca mai sus -->
-  </section>
-
-  <!-- ✅ LIGHTBOX (pop-up fullscreen) -->
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="close">&times;</span>
-    <img class="lightbox-content" id="lightbox-img">
-    <div id="caption"></div>
-  </div>
-
-  <!-- ✅ SCRIPT-ul pentru lightbox -->
-  <script>
-    function openLightbox(img, description) {
-      document.getElementById("lightbox").style.display = "block";
-      document.getElementById("lightbox-img").src = img.src;
-      document.getElementById("caption").innerText = description;
-    }
-
-    function closeLightbox() {
-      document.getElementById("lightbox").style.display = "none";
-    }
-  </script>
-
-</body>
-</html>
   </style>
 </head>
 <body>
