@@ -164,12 +164,46 @@
   padding: 10px;
   cursor: pointer;
   border-radius: 50%;
+  z-index: 10;
 }
 
 .prev { left: 10px; }
 .next { right: 10px; }
 </style>
 
+<script>
+const track = document.querySelector('.carousel-track');
+const slides = Array.from(track.children);
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+let currentIndex = 0;
+
+function updateSlide(index) {
+  const slideWidth = slides[0].getBoundingClientRect().width;
+  track.style.transform = `translateX(-${index * slideWidth}px)`;
+}
+
+// Butoane manuale
+prevButton.addEventListener('click', () => {
+  currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+  updateSlide(currentIndex);
+});
+
+nextButton.addEventListener('click', () => {
+  currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+  updateSlide(currentIndex);
+});
+
+// Slideshow automat
+setInterval(() => {
+  currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+  updateSlide(currentIndex);
+}, 3000); // schimbă poza la 3 secunde
+
+// Blochează click dreapta pe toate pozele
+slides.forEach(slide => {
+  slide.addEventListener("contextmenu", e => e.preventDefault());
+});
 <script>
 const track = document.querySelector('.carousel-track');
 const slides = Array.from(track.children);
