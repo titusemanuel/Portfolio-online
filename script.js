@@ -50,3 +50,18 @@ document.addEventListener("DOMContentLoaded", function() {
         console.warn("Nu au fost găsite imagini pentru carusel. Asigură-te că directorul 'images' conține imagini.");
     }
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const imgs = document.querySelectorAll("img.lazy");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.classList.remove("lazy");
+        observer.unobserve(img);
+      }
+    });
+  });
+  imgs.forEach(img => observer.observe(img));
+});
+
