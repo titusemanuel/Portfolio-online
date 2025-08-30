@@ -15,6 +15,39 @@
   footer {margin-top:36px;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,0.1);color:#9aa4b2;}
   @media (max-width:720px) { .gallery img {width:100%;} }
 </style>
+  .gallery {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+.photo {
+  position:relative;
+  width:calc(33% - 10px);
+}
+
+.photo img {
+  width:100%;
+  border-radius:8px;
+  cursor:pointer;
+  display:block;
+}
+
+.photo .author {
+  position:absolute;
+  bottom:5px;
+  right:5px;
+  font-size:10px;
+  color:white;
+  background:rgba(0,0,0,0.5);
+  padding:2px 4px;
+  border-radius:4px;
+}
+
+@media (max-width:720px) {
+  .photo { width:100%; }
+}
 </head>
 <body>
 
@@ -30,12 +63,28 @@
 <main class="container">
 
   <section id="gallery" class="gallery">
-    <img src="poza1.JPG" alt="Poza 1" />
-    <img src="poza2.JPG" alt="Poza 2" />
-    <img src="poza3.JPG" alt="Poza 3" />
-    <img src="poza4.JPG" alt="Poza 4" />
-    <img src="poza5.JPG" alt="Poza 5" />
-  </section>
+  <div class="photo">
+    <img src="poza1.JPG" alt="Poza 1" oncontextmenu="return false;">
+    <span class="author">Iliesi Titus Emanuel</span>
+  </div>
+  <div class="photo">
+    <img src="poza2.JPG" alt="Poza 2" oncontextmenu="return false;">
+    <span class="author">Iliesi Titus Emanuel</span>
+  </div>
+  <div class="photo">
+    <img src="poza3.JPG" alt="Poza 3" oncontextmenu="return false;">
+    <span class="author">Iliesi Titus Emanuel</span>
+  </div>
+  <div class="photo">
+    <img src="poza4.JPG" alt="Poza 4" oncontextmenu="return false;">
+    <span class="author">Iliesi Titus Emanuel</span>
+  </div>
+  <div class="photo">
+    <img src="poza5.JPG" alt="Poza 5" oncontextmenu="return false;">
+    <span class="author">Iliesi Titus Emanuel</span>
+  </div>
+</section>
+
 
 </main>
 
@@ -50,7 +99,7 @@
   
   <!-- Footer cu drepturi de autor -->
 <footer>
-  &copy; 2025 Numele Tău. Toate drepturile rezervate.
+  &copy; 2025 Iliesi Titus Emanuel. Toate drepturile rezervate.
 </footer>
 
 <script>
