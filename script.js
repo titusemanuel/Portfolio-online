@@ -64,4 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   imgs.forEach(img => observer.observe(img));
 });
+galleryLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  gallery.style.display = 'flex';
+  window.scrollTo({top: gallery.offsetTop, behavior: 'smooth'});
+});
+
 
