@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ro">
-<head>
+<head>  
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Portofoliu Fotografic</title>
@@ -15,39 +15,57 @@
   footer {margin-top:36px;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,0.1);color:#9aa4b2;}
   @media (max-width:720px) { .gallery img {width:100%;} }
 </style>
-  .gallery {
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:20px;
-}
+</head>
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portofoliu Fotografic</title>
+  <style>
+    body {margin:0;font-family:Arial,sans-serif;background:#061226;color:#e6eef8;}
+    header {position:sticky;top:0;background:#0b1220;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;z-index:10;}
+    header a {color:#9aa4b2;text-decoration:none;margin-left:16px;}
+    header a:hover {color:#60a5fa;}
+    .container {max-width:1100px;margin:0 auto;padding:20px;}
+    .gallery {display:none;gap:10px;margin-top:20px;}
+    .gallery img {width:calc(33% - 10px);border-radius:8px;cursor:pointer;}
+    footer {margin-top:36px;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,0.1);color:#9aa4b2;}
+    @media (max-width:720px) { .gallery img {width:100%;} }
 
-.photo {
-  position:relative;
-  width:calc(33% - 10px);
-}
+    /* Aici adaugi codul nou pentru nume și blocuri */
+    .gallery {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+    }
 
-.photo img {
-  width:100%;
-  border-radius:8px;
-  cursor:pointer;
-  display:block;
-}
+    .photo {
+      position:relative;
+      width:calc(33% - 10px);
+    }
 
-.photo .author {
-  position:absolute;
-  bottom:5px;
-  right:5px;
-  font-size:10px;
-  color:white;
-  background:rgba(0,0,0,0.5);
-  padding:2px 4px;
-  border-radius:4px;
-}
+    .photo img {
+      width:100%;
+      border-radius:8px;
+      cursor:pointer;
+      display:block;
+    }
 
-@media (max-width:720px) {
-  .photo { width:100%; }
-}
+    .photo .author {
+      position:absolute;
+      bottom:5px;
+      right:5px;
+      font-size:10px;
+      color:white;
+      background:rgba(0,0,0,0.5);
+      padding:2px 4px;
+      border-radius:4px;
+    }
+
+    @media (max-width:720px) {
+      .photo { width:100%; }
+    }
+  </style>
 </head>
 <body>
 
