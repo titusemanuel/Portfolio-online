@@ -12,4 +12,42 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   imgs.forEach(img => observer.observe(img));
 });
+const galleryImgs = document.querySelectorAll('.gallery .photo picture img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.getElementById('close');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+
+let currentIndex = 0;
+
+// Deschide lightbox
+galleryImgs.forEach((img, index) => {
+  img.addEventListener('click', () => {
+    currentIndex = index;
+    lightboxImg.src = img.src;
+    lightbox.style.display = 'flex';
+  });
+});
+
+// Închide lightbox
+closeBtn.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+
+// Navigare prev/next
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length;
+  lightboxImg.src = galleryImgs[currentIndex].src;
+});
+
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % galleryImgs.length;
+  lightboxImg.src = galleryImgs[currentIndex].src;
+});
+
+// Click în afara imaginii închide
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) lightbox.style.display = 'none';
+});
 
