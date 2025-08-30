@@ -124,22 +124,7 @@
     <a href="#contact">Contact</a>
   </nav>
 </header>
-
 <main class="container">
-  const galleryImgs = document.querySelectorAll('.gallery .photo picture img');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-let currentIndex = 0;
-
-galleryImgs.forEach((img, index) => {
-  img.addEventListener('click', () => {
-    currentIndex = index;
-    lightboxImg.src = img.src;
-    lightbox.style.display = 'flex';
-  });
-});
-
-
 <section id="gallery" class="gallery">
   <div class="photo">
     <picture class="lightbox-img-wrapper">
