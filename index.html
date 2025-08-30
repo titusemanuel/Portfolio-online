@@ -10,8 +10,8 @@
   header a {color:#9aa4b2;text-decoration:none;margin-left:16px;}
   header a:hover {color:#60a5fa;}
   .container {max-width:1100px;margin:0 auto;padding:20px;}
-  .gallery {display:none;gap:10px;margin-top:20px;}
-  .gallery img {width:calc(33% - 10px);border-radius:8px;cursor:pointer;}
+  .gallery {display:none;gap:10px;margin-top:20px;display:flex;flex-wrap:wrap;}
+  .gallery img {width:calc(33% - 10px);border-radius:8px;cursor:pointer;margin-bottom:10px;}
   footer {margin-top:36px;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,0.1);color:#9aa4b2;}
   @media (max-width:720px) { .gallery img {width:100%;} }
 </style>
@@ -28,13 +28,16 @@
 </header>
 
 <main class="container">
+
   <section id="gallery" class="gallery">
-  <img src="poza1.JPG" alt="Poza 1" />
-  <img src="poza2.JPG" alt="Poza 2" />
-  <img src="poza3.JPG" alt="Poza 3" />
-  <img src="poza4.JPG" alt="Poza 4" />
-  <img src="poza5.JPG" alt="Poza 5" />
-</section>
+    <img src="poza1.JPG" alt="Poza 1" />
+    <img src="poza2.JPG" alt="Poza 2" />
+    <img src="poza3.JPG" alt="Poza 3" />
+    <img src="poza4.JPG" alt="Poza 4" />
+    <img src="poza5.JPG" alt="Poza 5" />
+  </section>
+
+</main>
 
 <!-- Lightbox -->
 <div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:1000;">
@@ -45,6 +48,8 @@
 </div>
 
 <script>
+const galleryLink = document.getElementById('link-gallery');
+const gallery = document.getElementById('gallery');
 const galleryImgs = document.querySelectorAll('#gallery img');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
@@ -54,7 +59,14 @@ const nextBtn = document.getElementById('next');
 
 let currentIndex = 0;
 
-// Deschide lightbox
+// Arată galeria la click
+galleryLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  gallery.style.display = 'flex';
+  window.scrollTo({top: gallery.offsetTop, behavior: 'smooth'});
+});
+
+// Deschide lightbox la click pe poză
 galleryImgs.forEach((img, index) => {
   img.addEventListener('click', () => {
     currentIndex = index;
