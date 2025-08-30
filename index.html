@@ -28,44 +28,63 @@
 </header>
 
 <main class="container">
-  <section id="hero">
-    <h1>Bine ați venit!</h1>
-    <p>Click pe “Galerie” pentru a vedea toate fotografiile.</p>
-  </section>
-
   <section id="gallery" class="gallery">
-    <img src="poza1.JPG" alt="Poza 1" />
-    <img src="poza2.JPG" alt="Poza 2" />
-    <img src="poza3.JPG" alt="Poza 3" />
-    <img src="poza4.JPG" alt="Poza 4" />
-    <img src="poza5.JPG" alt="Poza 5" />
-    <img src="poza6.JPG" alt="Poza 6" />
-  </section>
+  <img src="poza1.JPG" alt="Poza 1" />
+  <img src="poza2.JPG" alt="Poza 2" />
+  <img src="poza3.JPG" alt="Poza 3" />
+  <img src="poza4.JPG" alt="Poza 4" />
+  <img src="poza5.JPG" alt="Poza 5" />
+</section>
 
-  <section id="contact" style="margin-top:40px">
-    <h3>Contact</h3>
-    <p>Pentru întrebări, trimiteți un mesaj.</p>
-  </section>
-</main>
-
-<footer>
-  &copy; 2025 Iliesi Titus Emanuel. Toate drepturile rezervate.
-</footer>
+<!-- Lightbox -->
+<div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:1000;">
+  <span id="close" style="position:absolute;top:20px;right:30px;font-size:40px;color:white;cursor:pointer;">&times;</span>
+  <span id="prev" style="position:absolute;top:50%;left:20px;font-size:60px;color:white;cursor:pointer;">&#10094;</span>
+  <span id="next" style="position:absolute;top:50%;right:20px;font-size:60px;color:white;cursor:pointer;">&#10095;</span>
+  <img id="lightbox-img" src="" style="max-width:90%;max-height:90%;border-radius:8px;">
+</div>
 
 <script>
-  const gallery = document.getElementById('gallery');
-  const linkGallery = document.getElementById('link-gallery');
-  
-  linkGallery.addEventListener('click', function(e) {
-    e.preventDefault();
-    if (gallery.style.display === 'flex') {
-      gallery.style.display = 'none';
-    } else {
-      gallery.style.display = 'flex';
-      gallery.style.flexWrap = 'wrap';
-    }
-    gallery.scrollIntoView({behavior: "smooth"});
+const galleryImgs = document.querySelectorAll('#gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.getElementById('close');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+
+let currentIndex = 0;
+
+// Deschide lightbox
+galleryImgs.forEach((img, index) => {
+  img.addEventListener('click', () => {
+    currentIndex = index;
+    lightboxImg.src = img.src;
+    lightbox.style.display = 'flex';
   });
+});
+
+// Închide lightbox
+closeBtn.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+
+// Navigare
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length;
+  lightboxImg.src = galleryImgs[currentIndex].src;
+});
+
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % galleryImgs.length;
+  lightboxImg.src = galleryImgs[currentIndex].src;
+});
+
+// Click în afara imaginii închide
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) lightbox.style.display = 'none';
+});
+</script>
+
 </script>
 
 </body>
